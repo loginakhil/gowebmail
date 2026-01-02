@@ -1,0 +1,31 @@
+version: '3.8'
+
+services:
+  gowebmail:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    container_name: gowebmail
+    ports:
+      - "1025:1025"  # SMTP port
+      - "8080:8080"  # HTTP port
+    volumes:
+      - gowebmail-data:/app/data
+      - ../configs/gowebmail.example.yml:/app/gowebmail.yml:ro
+    environment:
+      - GOWEBMAIL_LOG_LEVEL=info
+      - GOWEBMAIL_SMTP_HOST=0.0.0.0
+      - GOWEBMAIL_SMTP_PORT=1025
+      - GOWEBMAIL_HTTP_HOST=0.0.0.0
+      - GOWEBMAIL_HTTP_PORT=8080
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "wget", "--no-verbose", "--tries=1", "--spider", "http://localhost:8080/api/health"]
+      interval: 30s
+      timeout: 3s
+      retries: 3
+      start_period: 5s
+
+volumes:
+  gowebmail-data:
+    driver: local

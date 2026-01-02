@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GoWebMail - Email Testing Tool</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+    <div class="app">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <h1>📧 GoWebMail</h1>
+                <div class="header-stats">
+                    <span id="email-count" class="stat">0 emails</span>
+                    <span id="connection-status" class="stat status-connected">●</span>
+                </div>
+            </div>
+        </header>
+
+        <!-- Toolbar -->
+        <div class="toolbar">
+            <div class="search-section">
+                <input type="text" id="search-input" placeholder="Search emails..." class="search-input">
+                <button id="search-btn" class="btn btn-primary">Search</button>
+                <button id="clear-filters-btn" class="btn btn-secondary">Clear</button>
+            </div>
+            <div class="actions-section">
+                <button id="refresh-btn" class="btn btn-secondary">🔄 Refresh</button>
+                <button id="delete-selected-btn" class="btn btn-danger" disabled>🗑️ Delete Selected</button>
+                <button id="delete-all-btn" class="btn btn-danger">🗑️ Delete All</button>
+            </div>
+        </div>
+
+        <!-- Main content -->
+        <div class="main-content">
+            <!-- Email list -->
+            <div class="email-list-container">
+                <div id="email-list" class="email-list"></div>
+                <div id="loading" class="loading" style="display: none;">
+                    <div class="spinner"></div>
+                    Loading...
+                </div>
+                <div id="empty-state" class="empty-state">
+                    <div class="empty-icon">📭</div>
+                    <h2>No emails yet</h2>
+                    <p>Emails sent to SMTP port 1025 will appear here</p>
+                </div>
+            </div>
+
+            <!-- Email preview -->
+            <div class="email-preview-container">
+                <div id="email-preview" class="email-preview">
+                    <div class="preview-empty">
+                        <div class="empty-icon">📧</div>
+                        <p>Select an email to view</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/js/app.js"></script>
+</body>
+</html>
