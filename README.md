@@ -300,6 +300,15 @@ GOOS=darwin GOARCH=amd64 go build -o gowebmail-mac ./cmd/gowebmail
 go test ./...
 ```
 
+### Sending test email
+
+```bash
+curl --url 'smtp://localhost:1025' \
+  --mail-from 'test@example.com' \
+  --mail-rcpt 'recipient@example.com' \
+  -T <(echo -e 'Subject: Local Test\n\nIt works!')
+```  
+
 ## Security Considerations
 
 ⚠️ **Important**: GoWebMail is designed for development and testing environments only.
