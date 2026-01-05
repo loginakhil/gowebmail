@@ -31,11 +31,11 @@ WORKDIR /app
 # Copy binary from builder
 COPY --from=builder /build/gowebmail .
 
-# Copy web files
-COPY web ./web
+# Copy web files from builder
+COPY --from=builder /build/web ./web
 
-# Copy example config
-COPY configs/gowebmail.example.yml ./gowebmail.yml
+# Copy example config from builder
+COPY --from=builder /build/configs/gowebmail.example.yml ./gowebmail.yml
 
 # Create data directory
 RUN mkdir -p /app/data && chown -R gowebmail:gowebmail /app
