@@ -18,6 +18,7 @@ env:
 
 jobs:
   build-and-push:
+    environment: build
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -66,12 +67,12 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Update Docker Hub description
-        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
-        uses: peter-evans/dockerhub-description@v4
-        with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
-          repository: ${{ env.DOCKER_IMAGE }}
-          short-description: ${{ github.event.repository.description }}
-          readme-filepath: ./README.md
+#      - name: Update Docker Hub description
+#        if: github.event_name != 'pull_request' && github.ref == 'refs/heads/main'
+#        uses: peter-evans/dockerhub-description@v4
+#        with:
+#          username: ${{ secrets.DOCKERHUB_USERNAME }}
+#          password: ${{ secrets.DOCKERHUB_TOKEN }}
+#          repository: ${{ env.DOCKER_IMAGE }}
+#          short-description: ${{ github.event.repository.description }}
+#          readme-filepath: ./README.md
